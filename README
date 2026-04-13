@@ -1,0 +1,174 @@
+# AI vs Real Image Classification Project 🖼️🤖  
+*A deep learning project that detects whether an image is real or AI-generated using ResNet50 and Streamlit.*
+
+---
+
+## 📝 Project Description
+
+This project is a comprehensive machine learning solution designed to classify images as either **Real** or **Fake(AI-generated)**. It consists of two main components:
+
+1. **Jupyter Notebook** 📓: A detailed implementation of a deep learning model using **TensorFlow** and **Keras** to train a binary classifier based on the **ResNet50** architecture. The notebook handles data preprocessing, model training, evaluation, and visualization of results, achieving high accuracy in distinguishing real images from AI-generated ones.  
+2. **Streamlit App** 🌐: An interactive web application built with **Streamlit** that allows users to upload images and get real-time predictions on whether the image is real or fake (AI-generated). The app leverages the trained model for seamless inference.
+
+The project focuses on classifying images across various themes, including **people**, **animals**, **portraits**, **scenery**, and **psychedelics**, using a dataset that combines web-scraped and AI-generated images. This makes it a versatile tool for applications in **image classification**, **artistic exploration**, and **data visualization**.
+
+---
+
+## ⚡ Quick Start
+
+### Prerequisites
+- Python 3.10 or higher
+- pip
+
+### Installation
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/your-username/Real-VS-Fake-image-detection.git
+   cd Real-VS-Fake-image-detection
+   ```
+
+2. **Create a virtual environment (recommended):**
+   ```bash
+   python -m venv venv
+   # Windows
+   venv\Scripts\activate
+   # macOS/Linux
+   source venv/bin/activate
+   ```
+
+3. **Install dependencies:**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. **Download the model file** (if not included):
+   - The trained model (`my_model.keras`) is required. If it's not in the repo, download it from [Releases](https://github.com/your-username/Real-VS-Fake-image-detection/releases) or retrain using the notebook.
+
+5. **Run the Streamlit app:**
+   ```bash
+   streamlit run app.py
+   ```
+
+---
+
+### 📓 Running the Notebook
+
+The training notebook (`project.ipynb`) was developed on **Google Colab** with GPU acceleration. To run it locally:
+
+1. Remove or replace Colab-specific cells (e.g., `google.colab.files.upload()`).
+2. Update dataset paths to point to your local data directory.
+3. Ensure you have a GPU-enabled TensorFlow installation for reasonable training times.
+
+Alternatively, open it directly in [Google Colab](https://colab.research.google.com/) and upload your Kaggle API key when prompted.
+
+---
+
+#### 📊 Dataset Link  
+🔗 [AI-Generated Images vs Real Images Dataset on Kaggle](https://www.kaggle.com/datasets/nadasalem81/ai-generated-images-vs-real-images)
+
+---
+
+### 🌐 Streamlit App  
+The Streamlit app provides an interactive way to test the trained model. Upload an image, and the app will predict whether it's **Real** or **Fake** with a confidence score.  
+
+🔗 [Streamlit App Link](https://real-vs-fake-image-detection.streamlit.app/)
+
+---
+
+### 🎯 Objectives
+- Build and train a deep learning model to distinguish between Real and Fake (AI-generated) images.  
+- Provide an intuitive interface for users to test the model with their own images.  
+- Achieve high classification accuracy using transfer learning and data augmentation techniques.
+
+---
+
+### 🛠️ How It Works
+1. **Data Preprocessing**:
+   - Images from the dataset are organized into **Real** and **Fake** (AI-generated) folders.  
+   - The dataset is preprocessed using **ImageDataGenerator** with augmentations like horizontal flips, rotation, and zooming to improve model robustness.  
+   - Images are resized to 224x224 pixels and preprocessed using ResNet50's preprocessing function.
+
+2. **Model Architecture**:
+   - The model uses **ResNet50** (pre-trained on ImageNet) as the base, with its layers frozen to leverage learned features.  
+   - Custom layers are added, including **GlobalAveragePooling2D**, **Dense** layers with ReLU activation, **Dropout** for regularization, and a final **sigmoid** layer for binary classification.
+
+3. **Training**:
+   - The model is trained for **30 epochs** using the **Adam** optimizer and **binary crossentropy** loss.  
+   - **Class weights** are computed to handle any class imbalance in the dataset.  
+   - Training and validation accuracies are monitored, achieving **96.96% training accuracy** and **83.18% validation accuracy**.
+
+4. **Evaluation**:
+   - The model is evaluated using a **classification report** and **confusion matrix**, showing precision, recall, and F1-scores for both classes.  
+   - A random sample of validation images is visualized with their true and predicted labels.
+
+5. **Streamlit App**:
+   - Users can upload images through a user-friendly interface.  
+   - The app loads the trained model (`my_model.keras`) and predicts whether the uploaded image is **Real** or **AI-generated**, displaying the probability score.
+
+---
+
+### ✨ Key Features
+- **Themes**: People, animals, portraits, scenery, and psychedelics.  
+- **Applications**:
+  - **Image Classification**: Train models to distinguish real vs. AI-generated images.  
+  - **Artistic Exploration**: Inspire creative projects by blending AI-generated imagery with traditional art.  
+  - **Data Analysis**: Uncover visual trends and patterns through exploratory analysis.
+
+---
+
+### 📦 Dataset Size
+- **Training Set**: 856 images (split into Real and Fake classes).  
+- **Validation Set**: 214 images (20% of the dataset).
+
+---
+
+### 📈 Model Performance
+
+| Metric | Training | Validation |
+|:-------:|:----------:|:-------------:|
+| Accuracy | 96.96% | 83.18% |
+
+> **Note:** The ~14% gap between training and validation accuracy indicates some overfitting, primarily due to the small dataset size (1,070 images). See [Future Work](#-future-work) for planned improvements.
+
+**Classification Report:**
+
+              precision    recall  f1-score   support
+    Real         0.83      0.86      0.85       123
+    Fake         0.80      0.77      0.79        91
+
+ accuracy                             0.82       214
+ macro avg       0.82      0.82      0.82       214
+ weighted avg    0.82      0.82      0.82       214
+
+Confusion Matrix:
+
+[[106  17]
+ [ 21  70]]
+
+
+---
+
+### 🖼️ Example Predictions
+
+Visualization of 5 sample images with their predicted labels from the dataset:
+
+
+<img width="559" height="1990" alt="output" src="https://github.com/user-attachments/assets/42cdf4dd-9d69-454f-bead-96bd5e9255bc" />
+
+
+---
+
+### 🚀 Future Work
+
+- Expand dataset diversity (target 10,000+ images) for better generalization and to reduce overfitting.
+- Add a **held-out test set** for unbiased final evaluation.
+- Apply stronger regularization (increased dropout, weight decay, learning rate scheduling).
+- Experiment with other architectures like EfficientNet and Vision Transformer (ViT).
+- Add explainability features (Grad-CAM) in the Streamlit app to visualize model reasoning.
+
+---
+
+### 📄 License
+
+This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
