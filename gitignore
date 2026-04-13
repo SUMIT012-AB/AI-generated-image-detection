@@ -1,0 +1,43 @@
+# Model files (use Git LFS or host externally)
+*.keras
+*.h5
+*.pb
+*.tflite
+saved_model/
+
+# Dataset
+ai-generated-images-vs-real-images/
+*.zip
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Virtual environments
+venv/
+env/
+.venv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Streamlit
+.streamlit/secrets.toml
+
+# Kaggle
+kaggle.json
